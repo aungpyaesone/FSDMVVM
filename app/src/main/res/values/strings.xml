@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FSDMVVM</string>
+    <string name="rate">Rate</string>
+    <string name="value">Value</string>
+</resources>
