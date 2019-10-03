@@ -79,9 +79,9 @@ public class MainActivity extends AppCompatActivity {
                         rateData.getBND(),rateData.getBRL()
                         );
 
-                   viewModel.insert(data);
+                  // viewModel.insert(data);
                // showData();
-            //    myAdapter.bindData(setData(rateData));
+               myAdapter.bindData(setData(rateData));
             }
         });
     }
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getAllRate().observe(this, new Observer<List<RatesData>>() {
             @Override
             public void onChanged(List<RatesData> ratesData) {
-                myAdapter.bindData(setData(ratesData));
+               // myAdapter.bindData(setData(ratesData));
             }
         });
 
@@ -105,47 +105,47 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private List<String> setData(List<RatesData> rateData) {
+    private List<String> setData(Rates rateData) {
       //  Log.d("What is data", rateData.getCHF()+"");
         List<String> list = new ArrayList<>();
-        list.add(rateData.get(0).getCHF()+" CHF");
-        list.add(rateData.get(0).getZAR()+" ZAR");
-        list.add(rateData.get(0).getSAR()+" SAR");
-        list.add(rateData.get(0).getINR()+" INR");
-        list.add(rateData.get(0).getVND()+" VND");
-        list.add(rateData.get(0).getCNY()+" CNY");
-        list.add(rateData.get(0).getTHB()+" THB");
-        list.add(rateData.get(0).getAUD()+" AUD");
-        list.add(rateData.get(0).getKRW()+" KRW");
-        list.add(rateData.get(0).getILS()+" ILS");
+        list.add(rateData.getCHF()+" CHF");
+        list.add(rateData.getZAR()+" ZAR");
+        list.add(rateData.getSAR()+" SAR");
+        list.add(rateData.getINR()+" INR");
+        list.add(rateData.getVND()+" VND");
+        list.add(rateData.getCNY()+" CNY");
+        list.add(rateData.getTHB()+" THB");
+        list.add(rateData.getAUD()+" AUD");
+        list.add(rateData.getKRW()+" KRW");
+        list.add(rateData.getILS()+" ILS");
         //list.add(rateData.getMPR()+" MPR");
-        list.add(rateData.get(0).getJPY()+" JPY");
-        list.add(rateData.get(0).getBDT()+" BDT");
-        list.add(rateData.get(0).getGBP()+" GBP");
-        list.add(rateData.get(0).getKHR()+" KHR");
-        list.add( rateData.get(0).getIDR()+" IDR");
-        list.add(rateData.get(0).getPHP()+" PHP");
-        list.add(rateData.get(0).getKWD()+" KWD");
-        list.add(rateData.get(0).getRUB()+" RUB");
-        list.add(rateData.get(0).getHKD()+" HKD");
-        list.add(rateData.get(0).getRSD()+" RSD");
-        list.add(rateData.get(0).getEUR()+" EUR");
-        list.add(rateData.get(0).getDKK()+" DKK");
-        list.add(rateData.get(0).getUSD()+" USD");
-        list.add(rateData.get(0).getMYR()+" MYR");
-        list.add(rateData.get(0).getCAD()+" CAD");
-        list.add(rateData.get(0).getNOK()+" NOK");
-        list.add(rateData.get(0).getEGP()+" EGP");
-        list.add(rateData.get(0).getSGD()+" SGD");
-        list.add(rateData.get(0).getLKR()+" LKR");
-        list.add(rateData.get(0).getCZK()+" CZK");
-        list.add(rateData.get(0).getPKR()+" PKR");
-        list.add(rateData.get(0).getLAK()+" LAK");
-        list.add(rateData.get(0).getSEK()+" SEK");
-        list.add(rateData.get(0).getKES()+" KES");
-        list.add(rateData.get(0).getNZD()+" NZD");
-        list.add(rateData.get(0).getBND()+" BND");
-        list.add(rateData.get(0).getBRL()+" BRL");
+        list.add(rateData.getJPY()+" JPY");
+        list.add(rateData.getBDT()+" BDT");
+        list.add(rateData.getGBP()+" GBP");
+        list.add(rateData.getKHR()+" KHR");
+        list.add( rateData.getIDR()+" IDR");
+        list.add(rateData.getPHP()+" PHP");
+        list.add(rateData.getKWD()+" KWD");
+        list.add(rateData.getRUB()+" RUB");
+        list.add(rateData.getHKD()+" HKD");
+        list.add(rateData.getRSD()+" RSD");
+        list.add(rateData.getEUR()+" EUR");
+        list.add(rateData.getDKK()+" DKK");
+        list.add(rateData.getUSD()+" USD");
+        list.add(rateData.getMYR()+" MYR");
+        list.add(rateData.getCAD()+" CAD");
+        list.add(rateData.getNOK()+" NOK");
+        list.add(rateData.getEGP()+" EGP");
+        list.add(rateData.getSGD()+" SGD");
+        list.add(rateData.getLKR()+" LKR");
+        list.add(rateData.getCZK()+" CZK");
+        list.add(rateData.getPKR()+" PKR");
+        list.add(rateData.getLAK()+" LAK");
+        list.add(rateData.getSEK()+" SEK");
+        list.add(rateData.getKES()+" KES");
+        list.add(rateData.getNZD()+" NZD");
+        list.add(rateData.getBND()+" BND");
+        list.add(rateData.getBRL()+" BRL");
 
         return list;
     }
