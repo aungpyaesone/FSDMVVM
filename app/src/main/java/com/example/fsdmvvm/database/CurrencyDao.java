@@ -13,5 +13,5 @@ public interface CurrencyDao {
     void insert(RatesData ratesData);
 
     @Query("select * from rate_table")
-    LiveData<List<RatesData>> getAllRates();
+    LiveData<RatesData> getAllRates();
 }

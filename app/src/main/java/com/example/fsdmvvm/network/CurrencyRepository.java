@@ -23,7 +23,7 @@ public class CurrencyRepository {
     }
 
     public MutableLiveData<CurrencyResponse> getCurrencyResponse(){
-        final MutableLiveData<CurrencyResponse> currencyData = new MutableLiveData<>();
+        MutableLiveData<CurrencyResponse> currencyData = new MutableLiveData<>();
         apiInterface.getCurrencyResponse().enqueue(new Callback<CurrencyResponse>() {
             @Override
             public void onResponse(Call<CurrencyResponse> call, Response<CurrencyResponse> response) {

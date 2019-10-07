@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.fsdmvvm.R;
 import com.example.fsdmvvm.adapter.MyAdapter;
@@ -14,6 +16,7 @@ import com.example.fsdmvvm.database.RatesData;
 import com.example.fsdmvvm.model.Rates;
 import com.example.fsdmvvm.model.CurrencyResponse;
 import com.example.fsdmvvm.viewmodel.CustomViewModel;
+import com.example.fsdmvvm.viewmodel.DbViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +28,8 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     private MyAdapter myAdapter;
-    private CurrencyResponse currencyResponse;
     private CustomViewModel viewModel;
+    private DbViewModel dbViewModel;
     private Rates rateData;
 
     @BindView(R.id.recycler)
@@ -39,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this,this);
         init();
-        fetchData();
-       // showData();
+     //   fetchData();
+       showData();
         setUpRecycler();
     }
 
@@ -55,57 +58,85 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getCurrency().observe(this, new Observer<CurrencyResponse>() {
             @Override
             public void onChanged(CurrencyResponse currencyResponse) {
+                if(currencyResponse != null){
 
-                rateData = currencyResponse.getRates();
-              //  Log.i("my name is ice",rateData.getCHF()+"");
-                RatesData data = new RatesData(rateData.getCHF(),
-                        rateData.getZAR(),rateData.getSAR(),
-                        rateData.getINR(),rateData.getVND(),
-                        rateData.getCNY(),rateData.getTHB(),
-                        rateData.getAUD(),rateData.getKRW(),
-                        rateData.getILS(),rateData.getJPY(),
-                        rateData.getBDT(),rateData.getGBP(),
-                        rateData.getKHR(),rateData.getIDR(),
-                        rateData.getPHP(),rateData.getKWD(),
-                        rateData.getRUB(),rateData.getHKD(),
-                        rateData.getRSD(),rateData.getEUR(),
-                        rateData.getDKK(),rateData.getUSD(),
-                        rateData.getMYR(),rateData.getCAD(),
-                        rateData.getNOK(),rateData.getEGP(),
-                        rateData.getSGD(),rateData.getLKR(),
-                        rateData.getCZK(),rateData.getPKR(),
-                        rateData.getLAK(),rateData.getSEK(),
-                        rateData.getKES(),rateData.getNZD(),
-                        rateData.getBND(),rateData.getBRL()
-                        );
+                    rateData = currencyResponse.getRates();
+                    RatesData data = new RatesData();
+                    data.setCHF(rateData.getCHF().toString());
+                    data.setZAR(rateData.getZAR().toString());
+                    data.setSAR(rateData.getSAR().toString());
+                    data.setINR(rateData.getINR());
+                    data.setVND(rateData.getVND());
+                    data.setCNY(rateData.getCNY());
+                    data.setTHB(rateData.getTHB());
+                    data.setAUD(rateData.getAUD());
+                    data.setKRW(rateData.getKRW());
+                    data.setILS(rateData.getILS());
+                    data.setJPY(rateData.getJPY());
+                    data.setBDT(rateData.getBDT());
+                    data.setGBP(rateData.getGBP());
+                    data.setKHR(rateData.getKHR());
+                    data.setIDR(rateData.getIDR());
+                    data.setPHP(rateData.getPHP());
+                    data.setKWD(rateData.getKWD());
+                    data.setRUB(rateData.getRUB());
+                    data.setHKD(rateData.getHKD());
+                    data.setRSD(rateData.getRSD());
+                    data.setEUR(rateData.getEUR());
+                    data.setDKK(rateData.getDKK());
+                    data.setUSD(rateData.getUSD());
+                    data.setMYR(rateData.getMYR());
+                    data.setCAD(rateData.getCAD());
+                    data.setNOK(rateData.getNOK());
+                    data.setEGP(rateData.getEGP());
+                    data.setSGD(rateData.getSGD());
+                    data.setLKR(rateData.getLKR());
+                    data.setCZK(rateData.getCZK());
+                    data.setPKR(rateData.getPKR());
+                    data.setLAK(rateData.getLAK());
+                    data.setSEK(rateData.getSEK());
+                    data.setKES(rateData.getKES());
+                    data.setNZD(rateData.getNZD());
+                    data.setBND(rateData.getBND());
+                    data.setBRL(rateData.getBRL());
+                    Log.i("my name is ice",data.getCHF()+"");
+                    Log.i("it is ",data.getSAR());
 
-                  // viewModel.insert(data);
-               // showData();
-               myAdapter.bindData(setData(rateData));
+                    dbViewModel.insert(data);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
+                }
+// showData();
+              // myAdapter.bindData(setData(rateData));
             }
         });
     }
 
 
     private void showData(){
-        viewModel.getAllRate().observe(this, new Observer<List<RatesData>>() {
+
+        dbViewModel.getRatesDataLiveData().observe(this, new Observer<RatesData>() {
             @Override
-            public void onChanged(List<RatesData> ratesData) {
-               // myAdapter.bindData(setData(ratesData));
+            public void onChanged(RatesData mydata) {
+                myAdapter.bindData(setData(mydata));
+             //   Log.d("Hello Aung Pyae Sone",mydata.getAUD());
             }
         });
+
 
     }
 
     private void init() {
-        currencyResponse = new CurrencyResponse();
+
         viewModel = ViewModelProviders.of(this).get(CustomViewModel.class);
+        dbViewModel = ViewModelProviders.of(this).get(DbViewModel.class);
         viewModel.init();
 
 
     }
 
-    private List<String> setData(Rates rateData) {
+    private List<String> setData(RatesData rateData) {
       //  Log.d("What is data", rateData.getCHF()+"");
         List<String> list = new ArrayList<>();
         list.add(rateData.getCHF()+" CHF");

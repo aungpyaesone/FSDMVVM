@@ -10,6 +10,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.fsdmvvm.model.Rates;
+
 @Database(entities = {RatesData.class},version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -50,7 +52,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(Void... rate) {
             return null;
         }
     }

@@ -10,7 +10,7 @@ import java.util.List;
 public class RateRepository  {
 
     private CurrencyDao currencyDao;
-    private LiveData<List<RatesData>> allRates;
+    private LiveData<RatesData> allRates;
 
 
     private static RateRepository rateRepository;
@@ -36,7 +36,7 @@ public class RateRepository  {
         new InsertRateAsyncTask(currencyDao).execute(ratesData);
     }
 
-    public LiveData<List<RatesData>> getAllRate()
+    public LiveData<RatesData> getAllRate()
     {
         return allRates;
     }
