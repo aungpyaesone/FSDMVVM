@@ -53,6 +53,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... rate) {
+            currencyDao.deleteAll();
             return null;
         }
     }

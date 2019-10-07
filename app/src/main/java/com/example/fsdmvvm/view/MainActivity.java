@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this,this);
         init();
-     //   fetchData();
-       showData();
+        showData();
         setUpRecycler();
     }
+
 
     private void setUpRecycler() {
         myAdapter = new MyAdapter(this);
@@ -107,9 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(MainActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
                 }
-// showData();
-              // myAdapter.bindData(setData(rateData));
-            }
+        }
         });
     }
 
@@ -119,8 +117,11 @@ public class MainActivity extends AppCompatActivity {
         dbViewModel.getRatesDataLiveData().observe(this, new Observer<RatesData>() {
             @Override
             public void onChanged(RatesData mydata) {
+                if(mydata==null)
+                {
+                    fetchData();
+                }
                 myAdapter.bindData(setData(mydata));
-             //   Log.d("Hello Aung Pyae Sone",mydata.getAUD());
             }
         });
 
@@ -139,45 +140,50 @@ public class MainActivity extends AppCompatActivity {
     private List<String> setData(RatesData rateData) {
       //  Log.d("What is data", rateData.getCHF()+"");
         List<String> list = new ArrayList<>();
-        list.add(rateData.getCHF()+" CHF");
-        list.add(rateData.getZAR()+" ZAR");
-        list.add(rateData.getSAR()+" SAR");
-        list.add(rateData.getINR()+" INR");
-        list.add(rateData.getVND()+" VND");
-        list.add(rateData.getCNY()+" CNY");
-        list.add(rateData.getTHB()+" THB");
-        list.add(rateData.getAUD()+" AUD");
-        list.add(rateData.getKRW()+" KRW");
-        list.add(rateData.getILS()+" ILS");
-        //list.add(rateData.getMPR()+" MPR");
-        list.add(rateData.getJPY()+" JPY");
-        list.add(rateData.getBDT()+" BDT");
-        list.add(rateData.getGBP()+" GBP");
-        list.add(rateData.getKHR()+" KHR");
-        list.add( rateData.getIDR()+" IDR");
-        list.add(rateData.getPHP()+" PHP");
-        list.add(rateData.getKWD()+" KWD");
-        list.add(rateData.getRUB()+" RUB");
-        list.add(rateData.getHKD()+" HKD");
-        list.add(rateData.getRSD()+" RSD");
-        list.add(rateData.getEUR()+" EUR");
-        list.add(rateData.getDKK()+" DKK");
-        list.add(rateData.getUSD()+" USD");
-        list.add(rateData.getMYR()+" MYR");
-        list.add(rateData.getCAD()+" CAD");
-        list.add(rateData.getNOK()+" NOK");
-        list.add(rateData.getEGP()+" EGP");
-        list.add(rateData.getSGD()+" SGD");
-        list.add(rateData.getLKR()+" LKR");
-        list.add(rateData.getCZK()+" CZK");
-        list.add(rateData.getPKR()+" PKR");
-        list.add(rateData.getLAK()+" LAK");
-        list.add(rateData.getSEK()+" SEK");
-        list.add(rateData.getKES()+" KES");
-        list.add(rateData.getNZD()+" NZD");
-        list.add(rateData.getBND()+" BND");
-        list.add(rateData.getBRL()+" BRL");
+        if(rateData !=null){
 
+            list.add(rateData.getCHF()+" CHF");
+            list.add(rateData.getZAR()+" ZAR");
+            list.add(rateData.getSAR()+" SAR");
+            list.add(rateData.getINR()+" INR");
+            list.add(rateData.getVND()+" VND");
+            list.add(rateData.getCNY()+" CNY");
+            list.add(rateData.getTHB()+" THB");
+            list.add(rateData.getAUD()+" AUD");
+            list.add(rateData.getKRW()+" KRW");
+            list.add(rateData.getILS()+" ILS");
+            //list.add(rateData.getMPR()+" MPR");
+            list.add(rateData.getJPY()+" JPY");
+            list.add(rateData.getBDT()+" BDT");
+            list.add(rateData.getGBP()+" GBP");
+            list.add(rateData.getKHR()+" KHR");
+            list.add( rateData.getIDR()+" IDR");
+            list.add(rateData.getPHP()+" PHP");
+            list.add(rateData.getKWD()+" KWD");
+            list.add(rateData.getRUB()+" RUB");
+            list.add(rateData.getHKD()+" HKD");
+            list.add(rateData.getRSD()+" RSD");
+            list.add(rateData.getEUR()+" EUR");
+            list.add(rateData.getDKK()+" DKK");
+            list.add(rateData.getUSD()+" USD");
+            list.add(rateData.getMYR()+" MYR");
+            list.add(rateData.getCAD()+" CAD");
+            list.add(rateData.getNOK()+" NOK");
+            list.add(rateData.getEGP()+" EGP");
+            list.add(rateData.getSGD()+" SGD");
+            list.add(rateData.getLKR()+" LKR");
+            list.add(rateData.getCZK()+" CZK");
+            list.add(rateData.getPKR()+" PKR");
+            list.add(rateData.getLAK()+" LAK");
+            list.add(rateData.getSEK()+" SEK");
+            list.add(rateData.getKES()+" KES");
+            list.add(rateData.getNZD()+" NZD");
+            list.add(rateData.getBND()+" BND");
+            list.add(rateData.getBRL()+" BRL");
+
+            return list;
+        }
+        Toast.makeText(this, "Empty Data", Toast.LENGTH_SHORT).show();
         return list;
     }
 }
